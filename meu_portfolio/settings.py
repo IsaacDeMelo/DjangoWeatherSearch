@@ -83,6 +83,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'meu_portfolio.wsgi.application'
 
 
+X_FRAME_OPTIONS = 'ALLOWALL'
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
