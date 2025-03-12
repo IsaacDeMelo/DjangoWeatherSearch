@@ -18,7 +18,13 @@ STATIC_URL = '/static/'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'portfolio/static')]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+# Remova STATICFILES_DIRS em produção para evitar conflitos
+if os.getenv("RENDER"):
+    STATICFILES_DIRS = []  # Render não usa essa configuração
+else:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, "portfolio/static")]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -35,24 +41,25 @@ ALLOWED_HOSTS = ["djangoweathersearch.onrender.com"]
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'portfolio',  # Adicionando o app do portfólio
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "whitenoise.runserver_nostatic",  # Whitenoise para servir arquivos estáticos
+    "portfolio",  # Adicionando o app do portfólio
 ]
 
-
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Whitenoise precisa estar logo após SecurityMiddleware
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = 'meu_portfolio.urls'
