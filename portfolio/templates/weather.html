@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Clima</title>
+
+</head>
+
+<body>
+    <div class="weather">
+        <!-- Importado de Uiverse.io por sahilxkhadka / From Uiverse.io by sahilxkhadka -->
+        <div class="card">
+            <svg fill="none" viewBox="0 0 342 175" height="175" width="342" xmlns="http://www.w3.org/2000/svg"
+                class="background">
+                <path fill="url(#paint0_linear_103_640)"
+                    d="M0 66.4396C0 31.6455 0 14.2484 11.326 5.24044C22.6519 -3.76754 39.6026 0.147978 73.5041 7.97901L307.903 62.1238C324.259 65.9018 332.436 67.7909 337.218 73.8031C342 79.8154 342 88.2086 342 104.995V131C342 151.742 342 162.113 335.556 168.556C329.113 175 318.742 175 298 175H44C23.2582 175 12.8873 175 6.44365 168.556C0 162.113 0 151.742 0 131V66.4396Z">
+                </path>
+                <defs>
+                    <linearGradient gradientUnits="userSpaceOnUse" y2="128" x2="354.142" y1="128" x1="0"
+                        id="paint0_linear_103_640">
+                        <stop stop-color="#5936B4"></stop>
+                        <stop stop-color="#362A84" offset="1"></stop>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div class="cloud">
+                <img src="https://openweathermap.org/img/wn/{{ clima.icone }}@4x.png" alt="Ícone do clima">
+            </div>
+            {% if clima %}
+            <p class="main-text">{{ clima.temperatura }}°C</p>
+            <div class="info">
+                <div class="info-left">
+                    <p class="text-gray">H: {{ clima.temperatura_maxima }}°C L: {{ clima.temperatura_minima }}°C</p>
+                    <p>{{clima.pais }}, {{ clima.cidade }}</p>
+                    <p>{{ clima.descricao }}</p>
+                </div>
+            </div>
+            {% else %}
+            <p>...</p>
+            {% endif %}
+            <form method="GET">
+                <input type="text" name="city" placeholder="Digite uma cidade" required>
+                <button type="submit"><svg fill="#000000" width="32px" height="32px" viewBox="0 0 24 24" id="search" xmlns="http://www.w3.org/2000/svg" class="icon multi-color"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><ellipse id="secondary-fill" cx="8.5" cy="10" rx="5.5" ry="6.84" style="fill: #2ca9bc; stroke-width: 2;"></ellipse><path id="primary-stroke" d="M17,10a7,7,0,1,1-7-7A7,7,0,0,1,17,10Zm4,11-6-6" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path></g></svg></button>
+            </form>
+        </div>
+        </div>
+        <div class="readme">
+            ⓘ Este projeto foi feito utilizando tecnologias como Django, HTML5, CSS3 e JS. Consiste num sistema de requisição, buscando informações sobre o clima de várias cidades do mundo em tempo real: Temperatura (Em C°), incluindo as margens de temperatura tanto máxima quanto mínima, assim como o nome do país onde a cidade está localizada. A versão da API é gratuita, permitindo 50 requisições por minuto.
+        </div>
+</body>
+
+</html>
