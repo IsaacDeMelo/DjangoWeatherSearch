@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-s%_k#mjuoye!^-0%#-mo8*xg8nm$0ur5h)sj4zpduos8d85p5r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["djangoweathersearch.onrender.com"]
 
 
 # Application definition
