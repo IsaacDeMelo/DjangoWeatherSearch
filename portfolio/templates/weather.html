@@ -27,10 +27,10 @@
                     </linearGradient>
                 </defs>
             </svg>
+            {% if clima %}
             <div class="cloud">
                 <img src="https://openweathermap.org/img/wn/{{ clima.icone }}@4x.png" alt="Ícone do clima">
             </div>
-            {% if clima %}
             <p class="main-text">{{ clima.temperatura }}°C</p>
             <div class="info">
                 <div class="info-left">
@@ -40,7 +40,7 @@
                 </div>
             </div>
             {% else %}
-            <p>...</p>
+            <p>Cidade não encontrada.</p>
             {% endif %}
             <form method="GET">
                 <input type="text" name="city" placeholder="Digite uma cidade" required>
